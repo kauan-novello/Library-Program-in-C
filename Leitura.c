@@ -1,36 +1,3 @@
-/*
-    QUESTÃO 1 - O arquivo Leitura.c [1] consiste em um simples programa capaz de armazenar
-    dados do estoque de livros de uma livraria. O programa é capaz de coletar diversas informações
-    de diferentes títulos, como nome do autor e preço, e as salva em um arquivo de dados
-    (extensão .dat). Ao final de sua execução, o programa também imprime na tela todos os
-    exemplares inseridos até o momento.
-
-    Você foi recentemente contratado por uma empresa de TI que presta serviços para esta livraria
-    e sua primeira tarefa é melhorar este código de acordo com as requisições do cliente. As
-    principais funcionalidades que o cliente gostaria de adicionar ao atual sistema são:
-
-    1. Função de buscar certos livros através do título ou número de registro e retornar o
-    preço na tela;
-    2. Opção de deletar certos títulos caso eles estejam em falta no estoque;
-    3. Os títulos devem ser inseridos em ordem alfabética;
-    4. Uma opção de salvar em arquivo caso o usuário deseje;
-    Baseado nos requisitos acima, faça as seguintes modificações no código:
-
-    a) Implemente uma lista encadeada para armazenar as informações dos livros
-    inseridos pelo usuário;
-    b) Implemente funções de inserção, busca e remoção de elementos desta lista;
-    c) Implemente funções de salvar os dados da estrutura no arquivo .dat, caso o
-    usuário precise;
-    d) Melhore a atual interface, tornando-a mais amigável e incluído breve instruções
-    de todas as funcionalidades listadas acima;
-    e) Concerte erros de execução caso existam;
-
-    Além do código, escreva um arquivo README no formato .txt contendo
-    (1) informações de como o cliente pode executar seu código por linha de comando e
-    (2) uma listagem de todas as mudanças feitas no código original (bullet points).
-    Tanto o código (arquivo .c) quanto o README devem ser enviados na pasta zipada via classroom. Caso seu código tenha algum arquivo de
-    biblioteca (.c e/ou .h) também os inclua na pasta zipada (e deixe claro no README qualquer arquivo extra incluído no seu projeto).
-*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -108,11 +75,23 @@ void inserirLivro(ListaLivros *lista, Livro livro)
   else
   {
     Node *current = lista->head;
-    while (current->next != NULL)
+    Node *previous = NULL;
+    while (current != NULL && strcmp(livro.Titulo, current->livro.Titulo) > 0)
     {
+      previous = current;
       current = current->next;
     }
-    current->next = novoNode;
+
+    if (previous == NULL)
+    {
+      novoNode->next = lista->head;
+      lista->head = novoNode;
+    }
+    else
+    {
+      previous->next = novoNode;
+      novoNode->next = current;
+    }
   }
   printf("Livro inserido com sucesso\n");
 }
@@ -156,6 +135,7 @@ void deletarLivro(ListaLivros *lista, char *tituloOuNumReg)
   }
   printf("Livro nao encontrado.\n");
 }
+
 void deletarLivroMenu(ListaLivros *lista)
 {
   char deleteResp;
@@ -244,7 +224,10 @@ int main(void)
       deletarLivroMenu(lista);
       break;
     case 4:
-      buscarLivro(lista, " ");
+      printf("Digite o titulo ou numero de registro do livro que deseja buscar: ");
+      char tituloOuNumReg[50];
+      scanf("%s", tituloOuNumReg);
+      buscarLivro(lista, tituloOuNumReg);
       break;
     case 5:
       salvarEmArquivo(lista);
