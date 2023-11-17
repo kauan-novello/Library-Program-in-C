@@ -25,9 +25,9 @@
     de todas as funcionalidades listadas acima;
     e) Concerte erros de execução caso existam;
 
-    Além do código, escreva um arquivo README no formato .txt contendo 
-    (1) informações de como o cliente pode executar seu código por linha de comando e 
-    (2) uma listagem de todas as mudanças feitas no código original (bullet points). 
+    Além do código, escreva um arquivo README no formato .txt contendo
+    (1) informações de como o cliente pode executar seu código por linha de comando e
+    (2) uma listagem de todas as mudanças feitas no código original (bullet points).
     Tanto o código (arquivo .c) quanto o README devem ser enviados na pasta zipada via classroom. Caso seu código tenha algum arquivo de
     biblioteca (.c e/ou .h) também os inclua na pasta zipada (e deixe claro no README qualquer arquivo extra incluído no seu projeto).
 */
@@ -35,7 +35,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct{
+typedef struct
+{
   char Titulo[50];
   char Autor[50];
   int NumReg;
@@ -53,7 +54,8 @@ typedef struct
   Node *head;
 } ListaLivros;
 
-Livro GetLivro(){
+Livro GetLivro()
+{
   Livro livro;
   printf("\nADICIONANDO NOVO LIVRO\n ");
 
@@ -128,7 +130,8 @@ void imprimirLista(ListaLivros *lista)
   printf("\n");
 }
 
-void deletarLivro(ListaLivros *lista, char *tituloOuNumReg){
+void deletarLivro(ListaLivros *lista, char *tituloOuNumReg)
+{
   Node *current = lista->head;
   Node *previous = NULL;
 
@@ -197,17 +200,18 @@ void salvarEmArquivo(ListaLivros *lista)
   Node *current = lista->head;
   while (current != NULL)
   {
-    if (fwrite(&(current->livro), sizeof(Livro), 1, fptr) != 1){
+    if (fwrite(&(current->livro), sizeof(Livro), 1, fptr) != 1)
+    {
       break;
     }
     current = current->next;
   }
   fclose(fptr);
   printf("Lista de livros salva no arquivo com sucesso.\n");
-
 }
 
-int main(void){
+int main(void)
+{
   Livro livro;
   ListaLivros *lista = criarLista();
   int comand = 0;
@@ -216,11 +220,11 @@ int main(void){
   {
     printf("\nOla, seja bem-vindo a Library System\n");
     printf("O que voce deseja fazer?\n\n");
-    
+
     printf("1 - Inserir um novo Livro\n");
     printf("2 - Ver Lista de Livros\n");
     printf("3 - Excluir Livro\n");
-    printf("4 - Buscar Livros\n");
+    printf("4 - Buscar Livros (Digite o nome do livro ao lado)\n");
     printf("5 - Salvar\n");
     printf("6 - Sair\n\n");
 
@@ -240,7 +244,7 @@ int main(void){
       deletarLivroMenu(lista);
       break;
     case 4:
-      buscarLivro(lista, " "); 
+      buscarLivro(lista, " ");
       break;
     case 5:
       salvarEmArquivo(lista);
