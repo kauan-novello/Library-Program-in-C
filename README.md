@@ -1,12 +1,32 @@
-# Library-Program-in-C
-Projeto Arquivos em C - Programa para Biblioteca
+# Library System
 
-Informações de como o cliente pode executar seu código por linha de comando:
+## Descrição
+O projeto consiste em um sistema simples para gerenciar o estoque de livros de uma livraria. O programa permite ao usuário inserir novos livros, visualizar a lista de livros, excluir livros, buscar livros por título ou número de registro, salvar a lista em um arquivo e sair do programa.
 
-Bullet point: 
+## Funcionalidades Adicionais
+1. **Inserção Ordenada:** Os livros são inseridos na lista de forma ordenada pelo título.
+2. **Busca por Livro:** Permite ao usuário buscar um livro pelo título ou número de registro.
+3. **Exclusão de Livro:** Oferece a opção de excluir livros do estoque.
+4. **Salvar em Arquivo:** Permite salvar a lista de livros em um arquivo "livros.dat".
 
-- Antes a main do código iniciava já inicializando o arquivo e usava um Do while pra ir chamando a função getLivro() até que o usuário digitasse 'n' como 'resp';
-Como pedido, implementei uma lista encadeada para os livros, onde adicionei as novas funções pedidas de Inserir, Imprimir, Deletar, Buscar e diretamente na lista, e só então quando chamada a função salvarLivros() se inicializa o arquivo .dat;
-- Tranformei o getLivro() em uma função recursiva na sendo chamada na Inserção;
-- Mudei a sintaxe do getLivro(), ao invés de fgets(), passei a usar scanf(" %[^\n]", livro.Exemplo) para que não recebesse o \n na hora de ser printado;
-- Por fim adicionei todas as funções a um switch case para que o usuário possa ter a liberdade de escolher que ação quer tomar;
+## Como Executar
+Para compilar e executar o programa, siga os passos abaixo:
+
+1. Abra o terminal.
+2. Navegue até o diretório onde o código-fonte está localizado.
+3. Compile o código utilizando um compilador C, por exemplo:
+    
+    gcc -o library_system Leitura.c
+    
+4. Execute o programa:
+    
+    ./library_system
+    
+
+## Mudanças Realizadas no Código Original
+- Adição de uma lista encadeada para armazenar informações dos livros.
+- Implementação de funções de inserção, busca e remoção de elementos na lista.
+- Aprimoramento da interface do usuário e inclusão de instruções claras.
+- Ordenação dos livros por título durante a inserção.
+- Opção de salvar a lista em um arquivo.
+- Correção de erros de execução.
